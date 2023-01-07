@@ -5,8 +5,35 @@ import { data } from "../data/data";
 // Return example: 1902
 
 export function getGreatestDiscoveryYear(data) {
-  // Your code goes here...
+  const yearCount = data.asteroids
+  .map(asteroid => {
+    return asteroid.discoveryYear
+  })
+  .reduce((acc, val) => {
+    acc[val] = acc[val]
+      ? acc[val] += 1 : acc[val] = 1;
+    
+    return acc
+  },{});
+  
+  let sortedYear = Object.entries(yearCount).sort((a,b) => {
+    if(a[1] > b[1]){
+      return 1
+    }
+    if(a[1] < b[1]){
+      return -1
+    }
+  })
+  // console.log(sortedYear.pop().shift());
+  return Number(sortedYear.pop().shift());
 }
+// export function getGreatestDiscoveryYear(data) {
+//   var getDiscoveryYear = data.asteroids.map(asteroid => asteroid.discoveryYear)
+//   const count = getDiscoveryYear.reduce((acc, val) => {return{ ...acc, [val]: (acc[val] || 0) + 1}})
+//   var yearMostDiscoveries = Object.keys(count).reduce((a,b) => count[a] > count[b] ? a : b)
+//   console.log(typeof(yearMostDiscoveries), yearMostDiscoveries);
+//   return Number(yearMostDiscoveries)
+// }
 
 
 
